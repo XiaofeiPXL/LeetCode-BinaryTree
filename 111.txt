@@ -1,0 +1,47 @@
+LeetCode-111-Minimum Depth of Binary Tree
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.offer(root);
+        
+        int depth = 1;
+        int curNum = 1;
+        int nextNum = 0;
+        
+        while(!queue.isEmpty()){
+            root = queue.poll();
+            curNum--;
+            if(root.left==null && root.right==null){
+                return depth;
+            }
+            if(root.left!=null){
+                queue.offer(root.left);
+                nextNum++;
+            }
+            if(root.right!=null){
+                queue.offer(root.right);
+                nextNum++;
+            }
+            
+            if(curNum==0){
+                curNum = nextNum;
+                nextNum = 0;
+                depth++;
+            }
+        }
+        return depth;
+    }
+}

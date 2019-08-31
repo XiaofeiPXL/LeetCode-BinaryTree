@@ -1,0 +1,41 @@
+LeetCode-113-Path Sum II
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    
+    public void pathHelper(TreeNode root,int              sum,List<Integer>sumList,List<List<Integer>>pathList){
+            if(root==null){
+                return;
+            }
+            sumList.add(root.val);
+            sum = sum - root.val;
+            if(root.left==null && root.right==null){
+                if(sum==0){
+                    pathList.add(new ArrayList<Integer>(sumList));
+                }
+            }else{
+                if(root.left!=null){
+                    pathHelper(root.left,sum,sumList,pathList);
+                }
+                 if(root.right!=null){
+                    pathHelper(root.right,sum,sumList,pathList);
+                }
+            }
+            sumList.remove(sumList.size()-1);
+        }
+    
+    
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+          List<List<Integer>> pathList=new ArrayList<List<Integer>>();
+          List<Integer> sumList = new ArrayList<Integer>();
+          pathHelper(root,sum,sumList,pathList);
+          return pathList;
+    }
+}
