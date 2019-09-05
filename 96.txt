@@ -1,0 +1,26 @@
+LeetCode-96-Unique Binary Search Trees
+class Solution {
+    public int numTrees(int n) {
+        if(n==0||n==1){
+            return 1;
+        }
+        
+        int[] c  = new int[n+1];
+        c[0]=1;
+        
+        
+        // catalan number
+        //num = t+1;
+        //0<=i<=t;
+        //0<=i<=num-1;
+        //c(t+1) += ci*c(t-i);
+        //c(num) += ci*c(num-1-i);
+        
+        for(int num=1;num<=n;num++){
+            for(int i=0;i<=num-1;i++){
+                c[num] += c[i]*c[(num-1)-i];
+            }
+        }
+        return c[n];
+    }
+}

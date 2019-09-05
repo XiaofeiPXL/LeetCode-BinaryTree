@@ -1,0 +1,15 @@
+LeetCode-198-House Robber
+class Solution {
+    public int rob(int[] nums) {
+        int pre = 0;
+        int cur = 0;
+        //keep the first time pre=0;
+        for(int x : nums){
+            int temp = cur;
+            cur = Math.max(pre+x,cur);
+            pre = temp;
+        }
+        
+        return cur;
+    }
+}
